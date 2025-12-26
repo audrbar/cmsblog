@@ -2,6 +2,11 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['assets.example.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'api-eu-central-1.graphcms.com',
+      },
+    ],
   },
 }
