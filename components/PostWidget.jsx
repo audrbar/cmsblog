@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import moment from 'moment';
+import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 
 import { grpahCMSImageLoader } from '../util';
@@ -11,9 +11,9 @@ const PostWidget = ({ categories, slug }) => {
 
   useEffect(() => {
     if (slug) {
-      getSimilarPosts(categories, slug).then((result) => {setRelatedPosts(result)});
+      getSimilarPosts(categories, slug).then((result) => { setRelatedPosts(result) });
     } else {
-      getRecentPosts().then((result) => {setRelatedPosts(result)});
+      getRecentPosts().then((result) => { setRelatedPosts(result) });
     }
   }, [slug]);
 
@@ -34,7 +34,7 @@ const PostWidget = ({ categories, slug }) => {
             />
           </div>
           <div className="flex-grow ml-4">
-            <p className="text-gray-500 font-xs">{moment(post.createdAt).format('MMM DD, YYYY')}</p>
+            <p className="text-gray-500 font-xs">{format(parseISO(post.createdAt), 'MMM dd, yyyy')}</p>
             <Link href={`/post/${post.slug}`} className="text-md" key={index}>{post.title}</Link>
           </div>
         </div>
